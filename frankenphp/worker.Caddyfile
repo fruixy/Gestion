@@ -1,4 +1,10 @@
-worker {
-	file ./public/index.php
-	env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
+{
+    auto_https off
+}
+
+http://0.0.0.0:80 {
+    root * /app/public
+
+    php_fastcgi unix//var/run/php/php-fpm.sock
+    file_server
 }

@@ -1,4 +1,5 @@
 {
+    auto_https off
     order php_server before file_server
 
     frankenphp {
@@ -6,7 +7,7 @@
     }
 }
 
-{$SERVER_NAME:localhost} {
+http://0.0.0.0:80 {
     root * /app/public
 
     encode zstd br gzip
@@ -14,4 +15,5 @@
     header ?Permissions-Policy "browsing-topics=()"
 
     php_server
+    file_server
 }
