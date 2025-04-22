@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
+use App\Enum\IssueStatus;
+use App\Enum\IssueType;
 use App\Repository\IssueRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: IssueRepository::class)]
 class Issue
@@ -20,9 +23,10 @@ class Issue
     #[ORM\JoinColumn(nullable: false)]
     private ?Project $project = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $type = null;
+    #[ORM\Column(type: Types::SMALLINT, enumType: IssueType::class)]
+    private ?IssueType $type = null;
 
+    #[Assert\Length(max: 100)]
     #[ORM\Column(length: 100)]
     private ?string $summary = null;
 
@@ -42,12 +46,18 @@ class Issue
     /**
      * @var Collection<int, Attachment>
      */
-    #[ORM\OneToMany(targetEntity: Attachment::class, mappedBy: 'issue')]
-    private Collection $attachments;
+    #[ORM\OneToMany(targetEntity: Attachment::class, mappedBy: 'issue', orphanRemoval: true)]
+    private Collection $attachment;
+
+    #[ORM\Column(type: Types::SMALLINT, enumType: IssueStatus::class)]
+    private ?IssueStatus $status = null;
+
+
+    private ?string $keyCode = null;
 
     public function __construct()
     {
-        $this->attachments = new ArrayCollection();
+        $this->attachment = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,12 +77,12 @@ class Issue
         return $this;
     }
 
-    public function getType(): ?int
+    public function getType(): ?IssueType
     {
         return $this->type;
     }
 
-    public function setType(int $type): static
+    public function setType(IssueType $type): static
     {
         $this->type = $type;
 
@@ -142,30 +152,47 @@ class Issue
     /**
      * @return Collection<int, Attachment>
      */
-    public function getAttachments(): Collection
+    public function getAttachment(): Collection
     {
-        return $this->attachments;
+        return $this->attachment;
     }
 
-    public function addAttachment(Attachment $attachment): static
+    public function addAttachment(Attachment $attachement): static
     {
-        if (!$this->attachments->contains($attachment)) {
-            $this->attachments->add($attachment);
-            $attachment->setIssue($this);
+        if (!$this->attachment->contains($attachement)) {
+            $this->attachment->add($attachement);
+            $attachement->setIssue($this);
         }
 
         return $this;
     }
 
-    public function removeAttachment(Attachment $attachment): static
+    public function removeAttachment(Attachment $attachement): static
     {
-        if ($this->attachments->removeElement($attachment)) {
+        if ($this->attachment->removeElement($attachement)) {
             // set the owning side to null (unless already changed)
-            if ($attachment->getIssue() === $this) {
-                $attachment->setIssue(null);
+            if ($attachement->getIssue() === $this) {
+                $attachement->setIssue(null);
             }
         }
 
         return $this;
+    }
+
+    public function getStatus(): ?IssueStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(IssueStatus $status): static
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getKeyCode(): ?string
+    {
+        return $this->project->getKeyCode(). '-' . $this->id;
     }
 }

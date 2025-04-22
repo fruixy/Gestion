@@ -6,6 +6,7 @@ use App\Repository\AttachmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AttachmentRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Attachment
 {
     #[ORM\Id]
@@ -19,7 +20,7 @@ class Attachment
     #[ORM\Column(length: 255)]
     private ?string $path = null;
 
-    #[ORM\ManyToOne(inversedBy: 'attachments')]
+    #[ORM\ManyToOne(inversedBy: 'attachements')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Issue $issue = null;
 

@@ -19,8 +19,8 @@ services:
       TRUSTED_PROXIES: ${TRUSTED_PROXIES:-127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
     image: pentiminax/tasksphere:${IMAGE_TAG:-latest}
     volumes:
-      - caddy_data:/data:Z
-      - caddy_config:/config:Z
+      - caddy_data:/data
+      - caddy_config:/config
     ports:
       # HTTP
       - target: 80

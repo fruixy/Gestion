@@ -34,10 +34,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     private ?string $password = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $firstname = null;
+    private ?string $firstName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $lastname = null;
+    private ?string $lastName = null;
 
     /**
      * @var Collection<int, Project>
@@ -151,29 +151,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
     public function __toString(): string
     {
-        return (string) $this->username;
+        return $this->username;
     }
 
-    public function getFirstname(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->firstname;
+        return $this->firstName;
     }
 
-    public function setFirstname(?string $firstname): static
+    public function setFirstName(?string $firstName): static
     {
-        $this->firstname = $firstname;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
-    public function getLastname(): ?string
+    public function getLastName(): ?string
     {
-        return $this->lastname;
+        return $this->lastName;
     }
 
-    public function setLastname(?string $lastname): static
+    public function setLastName(?string $lastName): static
     {
-        $this->lastname = $lastname;
+        $this->lastName = $lastName;
 
         return $this;
     }

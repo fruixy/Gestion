@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0cb390db14ab9e9679568ae472133619",
+    "content-hash": "4375f643002d2cdac528b91c28427b5b",
     "packages": [
         {
             "name": "composer/semver",
@@ -3487,16 +3487,16 @@
         },
         {
             "name": "symfony/form",
-            "version": "v7.0.10",
+            "version": "v7.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/form.git",
-                "reference": "2713488dbb290a6c0d043766b0e9d0b02672c935"
+                "reference": "d5db6599775a563792391d0045decc240e7ebd1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/form/zipball/2713488dbb290a6c0d043766b0e9d0b02672c935",
-                "reference": "2713488dbb290a6c0d043766b0e9d0b02672c935",
+                "url": "https://api.github.com/repos/symfony/form/zipball/d5db6599775a563792391d0045decc240e7ebd1e",
+                "reference": "d5db6599775a563792391d0045decc240e7ebd1e",
                 "shasum": ""
             },
             "require": {
@@ -3563,7 +3563,7 @@
             "description": "Allows to easily create, process and reuse HTML forms",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/form/tree/v7.0.10"
+                "source": "https://github.com/symfony/form/tree/v7.0.6"
             },
             "funding": [
                 {
@@ -3579,7 +3579,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-19T08:29:37+00:00"
+            "time": "2024-03-28T09:20:36+00:00"
         },
         {
             "name": "symfony/framework-bundle",
@@ -6490,16 +6490,16 @@
         },
         {
             "name": "symfony/twig-bridge",
-            "version": "v7.0.8",
+            "version": "v7.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bridge.git",
-                "reference": "c8e05d7545962198df715d705c132de0674dc5b2"
+                "reference": "1d5745dac2e043553177a3b88a76b99c2a2f6c2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/c8e05d7545962198df715d705c132de0674dc5b2",
-                "reference": "c8e05d7545962198df715d705c132de0674dc5b2",
+                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/1d5745dac2e043553177a3b88a76b99c2a2f6c2e",
+                "reference": "1d5745dac2e043553177a3b88a76b99c2a2f6c2e",
                 "shasum": ""
             },
             "require": {
@@ -6578,7 +6578,7 @@
             "description": "Provides integration for Twig with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/twig-bridge/tree/v7.0.8"
+                "source": "https://github.com/symfony/twig-bridge/tree/v7.0.6"
             },
             "funding": [
                 {
@@ -6594,7 +6594,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-31T14:55:39+00:00"
+            "time": "2024-03-28T21:02:11+00:00"
         },
         {
             "name": "symfony/twig-bundle",
@@ -9824,7 +9824,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
@@ -9832,6 +9832,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
