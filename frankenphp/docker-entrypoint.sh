@@ -7,8 +7,8 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	fi
 
 	php bin/console importmap:install
-	php bin/console assets:install public
 	php bin/console asset-map:compile
+	php bin/console assets:install public
 
 	if grep -q ^DATABASE_URL= .env; then
 		echo "Waiting for database to be ready..."
