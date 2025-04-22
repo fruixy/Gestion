@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <h1 class="display-5 text-center text-primary mb-4">
+                        <i class="bi bi-box-arrow-in-right"></i> Connexion
+                    </h1>
+                    {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                        </div>
+                    {% endif %}
+                    {% if app.user %}
+                        <div class="alert alert-success text-center">
+                            Vous êtes connecté en tant que {{ app.user.userIdentifier }}.
+                            <a href="{{ path('app_logout') }}" class="text-primary fw-bold">Se déconnecter</a>
+                        </div>
+                    {% endif %}
+
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nom d'utilisateur</label>
+                            <input type="text" value="{{ last_username }}" name="_username" id="username" 
+                                   class="form-control" autocomplete="username" required autofocus>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <input type="password" name="_password" id="password" 
+                                   class="form-control" autocomplete="current-password" required>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input type="checkbox" name="_remember_me" id="_remember_me" class="form-check-input">
+                            <label for="_remember_me" class="form-check-label">Se souvenir de moi</label>
+                        </div>
+
+                        <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+                        
+                        <p>
+                            <a href="{{ path('app_work_in_progress') }}" class="text-decoration-none">
+                                Mot de passe oublié ?
+                            </a>
+                        </p>
+
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-lg" type="submit">
+                                <i class="bi bi-box-arrow-in-right"></i> Se connecter
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Work in Progress{% endblock %}
+
+{% block body %}
+<div class="container text-center py-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-body p-5">
+            <h1 class="display-4 text-primary mb-4">
+                <i class="bi bi-tools"></i> Work in Progress
+            </h1>
+            <p class="lead text-secondary mb-4">
+                Cette fonctionnalité est en cours de développement. Revenez bientôt !
+            </p>
+            <a href="{{ path('app_home') }}" class="btn btn-primary btn-lg">
+                <i class="bi bi-arrow-left"></i> Retour à l'accueil
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

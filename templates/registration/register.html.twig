@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <h1 class="display-5 text-center text-primary mb-4">
+                        <i class="bi bi-person-plus-fill"></i> Inscription
+                    </h1>
+                    
+                    {% if form_errors(registrationForm) %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ form_errors(registrationForm) }}
+                        </div>
+                    {% endif %}
+
+                    {{ form_start(registrationForm) }}
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.username, 'Nom d’utilisateur', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.username, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.username) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.plainPassword) }}
+                    </div>
+
+                    <div class="form-check mb-4">
+                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                        {{ form_label(registrationForm.agreeTerms, 'J’accepte les conditions générales', {'label_attr': {'class': 'form-check-label'}}) }}
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-box-arrow-in-right"></i> S’inscrire
+                        </button>
+                    </div>
+                    
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

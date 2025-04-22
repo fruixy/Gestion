@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultat de la recherche{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h1 class="text-center text-primary mb-4">Résultat de la recherche</h1>
+
+    {% if articles|length > 0 %}
+        <h2 class="my-4 text-muted">Articles trouvés :</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for article in articles %}
+                <div class="col">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">{{ article.title }}</h5>
+                            <p class="card-text">
+                                {{ article.content[:150] ~ '...' }}
+                            </p>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <a href="{{ path('app_article_show', {'id': article.id}) }}" class="btn btn-outline-primary w-100">
+                                Lire l'article
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center mt-4" role="alert">
+            Aucun article correspondant à votre recherche n'a été trouvé.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
