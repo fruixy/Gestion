@@ -3,16 +3,13 @@
     order php_server before file_server
 
     frankenphp {
-
     }
 }
 
-http://0.0.0.0:80 {
+:80 {
     root * /app/public
 
     encode zstd br gzip
-
-    header ?Permissions-Policy "browsing-topics=()"
 
     php_server
     file_server
