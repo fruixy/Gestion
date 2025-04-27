@@ -14,7 +14,7 @@ Request::setTrustedProxies(
     Request::HEADER_X_FORWARDED_PROTO
 );
 
-require_once dirname(DIR).'/vendor/autoload_runtime.php';
+require_once dirname(DIR) . '/vendor/autoload_runtime.php';
 
 return function (array $context) {
     return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);

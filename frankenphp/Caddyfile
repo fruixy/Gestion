@@ -1,8 +1,10 @@
 {
     order php_server before file_server
-
-    frankenphp {
-
+    auto_https disable_redirects
+    servers :443 {
+        protocol {
+            allow_h2c
+        }
     }
 }
 
@@ -11,7 +13,10 @@
 
     encode zstd br gzip
 
-    header ?Permissions-Policy "browsing-topics=()"
+    header {
+        Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+        Permissions-Policy "browsing-topics=()"
+    }
 
     php_server
 }
