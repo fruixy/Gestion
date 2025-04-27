@@ -14,3 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
         new bootstrap.Dropdown(element);
     });
 });
+
+const setBootstrapTheme = () => {
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-bs-theme', prefersDarkMode ? 'dark' : 'light');
+};
+
+setBootstrapTheme();
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setBootstrapTheme);

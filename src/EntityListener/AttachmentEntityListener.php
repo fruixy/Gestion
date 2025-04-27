@@ -13,12 +13,12 @@ class AttachmentEntityListener
 {
     public function __construct(
         private readonly AttachmentService $attachmentService
-    ){
+    )
+    {
     }
 
     public function preRemove(Attachment $attachment, LifecycleEventArgs $event): void
     {
-        // Supprimer le fichier avant de supprimer l'entité
         $this->attachmentService->delete($attachment);
     }
 }

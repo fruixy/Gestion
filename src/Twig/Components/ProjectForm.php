@@ -17,7 +17,7 @@ use Symfony\UX\LiveComponent\ValidatableComponentTrait;
 
 #[AsLiveComponent]
 class ProjectForm extends AbstractController
-{   
+{
     use ComponentWithFormTrait;
     use DefaultActionTrait;
     use ValidatableComponentTrait;
@@ -33,7 +33,7 @@ class ProjectForm extends AbstractController
     }
 
     #[LiveAction]
-    public function save(EntityManagerInterface $em): Response
+    public function save(EntityManagerInterface $manager): Response
     {
         $this->validate();
 
@@ -42,7 +42,7 @@ class ProjectForm extends AbstractController
         /** @var Project $project */
         $project = $this->getForm()->getData();
 
-        $em->persist($project);
+        $manager->persist($project);
 
         /** @var User $user */
         $user = $this->getUser();
@@ -50,10 +50,10 @@ class ProjectForm extends AbstractController
         $user->addProject($project);
         $user->setSelectedProject($project);
 
-        $em->flush();
+        $manager->flush();
 
         return $this->redirectToRoute('project_show', [
-            'keyCode' => $project->getKeyCode()
+            'keyCode' => $project->getKeyCode(),
         ]);
     }
 }

@@ -9,10 +9,15 @@ use Symfony\Bundle\SecurityBundle\Security;
 class IssueService
 {
     public function __construct(
-        private readonly IssueRepository $issueRepo,
+        private readonly IssueRepository $repo,
         private readonly Security $security
-    ){
+    )
+    {
+    }
 
+    public function getNewIssues(): array
+    {
+        return $this->getIssuesByStatus([IssueStatus::NEW]);
     }
 
     public function getReadyIssues(): array
@@ -30,15 +35,14 @@ class IssueService
         return $this->getIssuesByStatus([IssueStatus::RESOLVED]);
     }
 
-    private function getIssuesByStatus(array $statuses): array
-    {   
-        /** @var User $user */
-        $user = $this->security->getUser();	
+    public function getIssuesByStatus(array $statuses): array
+    {
+        $user = $this->security->getUser();
 
         return $user
-        ->getSelectedProject()
-        ->getIssues()
-        ->filter(fn ($issues) => in_array($issues->getStatus(), $statuses))
-        ->toArray();
+            ->getSelectedProject()
+            ->getIssues()
+            ->filter(fn($issue) => \in_array($issue->getStatus(), $statuses))
+            ->toArray();
     }
 }

@@ -7,7 +7,6 @@ security:
             entity:
                 class: App\Entity\User
                 property: username
-    
 
     firewalls:
         dev:
@@ -34,7 +33,6 @@ security:
         - { path: ^/register, roles: PUBLIC_ACCESS }
         - { path: ^/logout, roles: ROLE_USER }
         - { path: ^/, roles: ROLE_USER }
-
 
 when@test:
     security:

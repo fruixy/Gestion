@@ -15,8 +15,6 @@ use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-
-
 #[AsLiveComponent]
 class IssueForm extends AbstractController
 {
@@ -35,19 +33,18 @@ class IssueForm extends AbstractController
     }
 
     #[LiveAction]
-    public function save(EntityManagerInterface $em): Response
+    public function save(EntityManagerInterface $manager): Response
     {
         $this->validate();
-        
         $this->submitForm();
+
         /** @var Issue $issue */
         $issue = $this->getForm()->getData();
-
-        $em->persist($issue);
-        $em->flush();
+        $manager->persist($issue);
+        $manager->flush();
 
         return $this->redirectToRoute('issue_show',[
-            'id'=> $issue->getId()
+            'id'=> $issue->getId(),
         ]);
     }
 }

@@ -10,7 +10,7 @@ use App\Entity\Project;
 class ProjectService
 {
     public function __construct(
-        private readonly EntityManagerInterface $em,
+        private readonly EntityManagerInterface $manager,
         private readonly ProjectRepository $projectRepo
     ){
     }
@@ -19,7 +19,7 @@ class ProjectService
     {
         $projects = [];
 
-        foreach ($user->getProjects() as $project){
+        foreach ($user->getProjects() as $project) {
             $projects[$project->getKeyCode()] = [
                 'id' => $project->getId(),
                 'name' => $project->getName(),
@@ -38,7 +38,7 @@ class ProjectService
 
     public function remove(Project $project)
     {
-        $this->em->remove($project);
-        $this->em->flush();
+        $this->manager->remove($project);
+        $this->manager->flush();
     }
 }

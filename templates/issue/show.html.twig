@@ -5,73 +5,76 @@
 {% block body %}
     <div class="container md-3">
         <div class="row">
-            <div class="col-md-8 col-sm-12">
+            <div class="col-lg-8 col-md-7 col-sm-12 mb-sm-3">
                 {{ component('Issue', {
                     'attachments': issue.attachment.toArray,
-                    'issue': issue
+                    'issue': issue,
                 }) }}
             </div>
-            <div class="col-md-4 col-sm-12">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12">
-                        {{ component('SelectIssueType', {
-                            'issue': issue,
-                            'type': issue.type,
-                            'types': types
-                        }) }}
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                        {{ component('SelectIssueStatus', {
-                            'issue': issue,
-                            'status': issue.status,
-                            'statuses': statuses
-                        }) }}
-                    </div>
-                </div>
-
+            <div class="col-lg-4 col-md-5 col-sm-12">
                 <div class="row">
                     <div class="col">
                         <div class="card">
-                            <div class="card-header">Détails</div>
+                            <div class="card-header"><i class="bi bi-receipt-cutoff"></i> Details</div>
                             <div class="card-body">
                                 <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
                                     <tbody class="align-middle">
-                                    <tr>
-                                        <td class="fw-bold">
-                                            <small>Responsable</small>
-                                        </td>
-                                        <td>
-                                            {{ component('SelectIssueAssignee', {
-                                                'issue': issue,
-                                                'people': issue.project.members.toArray,
-                                                'assignee': issue.assignee
-                                            }) }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold"><small>Nombre de jour estimés</small></td>
-                                        <td>
-                                            {{ component('InputStoryPointEstimate', {
-                                                'issue': issue
-                                            }) }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold"><small>Rapporteur</small></td>
-                                        <td>
-                                            {{ component('SelectIssueReporter', {
-                                                'issue': issue,
-                                                'people': issue.project.members.toArray,
-                                                'reporter': issue.reporter
-                                            }) }}
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td class="fw-bold">
+                                                <small><i class="bi bi-sign-intersection-t-fill"></i> Type</small>
+                                            </td>
+                                            <td>
+                                                {{ component('SelectIssueType', {
+                                                    'issue': issue,
+                                                    'type': issue.type,
+                                                    'types': types,
+                                                }) }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold">
+                                                <small><i class="bi bi-stoplights-fill"></i> Status</small>
+                                            </td>
+                                            <td>
+                                                {{ component('SelectIssueStatus', {
+                                                    'issue': issue,
+                                                    'status': issue.status,
+                                                    'statuses': statuses,
+                                                }) }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold">
+                                                <small><i class="bi bi-person-fill"></i> Assignee</small>
+                                            </td>
+                                            <td>
+                                                {{ component('SelectIssueAssignee', {
+                                                    'issue': issue,
+                                                    'people': issue.project.members.toArray,
+                                                    'assignee': issue.assignee,
+                                                }) }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold"><small><i class="bi bi-calendar-range-fill"></i> Estimated Days</small></td>
+                                            <td>
+                                                {{ component('InputStoryPointEstimate', {
+                                                    'issue': issue,
+                                                }) }}
+                                            </td>
+                                        </tr>
+                                        <tr style="border-bottom: transparent;">
+                                            <td class="fw-bold">
+                                                <small><i class="bi bi-megaphone-fill"></i> Reporter</small>
+                                            </td>
+                                            <td>
+                                                {{ component('SelectIssueReporter', {
+                                                    'issue': issue,
+                                                    'people': issue.project.members.toArray,
+                                                    'reporter': issue.reporter,
+                                                }) }}
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

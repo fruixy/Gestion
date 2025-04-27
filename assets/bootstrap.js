@@ -1,5 +1,5 @@
 import { startStimulusApp } from '@symfony/stimulus-bundle';
-import ProjectBoardController from './controllers/project_board_controllers.js';
+import ProjectBoardController from './controllers/ProjectBoardController.js';
 
 export const app = startStimulusApp();
 

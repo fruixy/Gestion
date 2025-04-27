@@ -2,7 +2,6 @@
 
 namespace App\Twig\Components;
 
-use App\Entity\Issue;
 use App\Enum\IssueStatus;
 use App\Service\IssueService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,22 +16,27 @@ class ProjectBoard
 {
     use DefaultActionTrait;
 
-    /** @var Issue[] */    
+    /** @var \App\Entity\Issue[] */
+    #[LiveProp(writable: true)]
+    public array $newIssues = [];
+
+    /** @var \App\Entity\Issue[] */
     #[LiveProp(writable: true)]
     public array $readyIssues = [];
 
-    /** @var Issue[] */
+    /** @var \App\Entity\Issue[] */
     #[LiveProp(writable: true)]
     public array $inProgressIssues = [];
 
-    /** @var Issue[] */
+    /** @var \App\Entity\Issue[] */
     #[LiveProp(writable: true)]
     public array $resolvedIssues = [];
 
     public function __construct(
-        private readonly EntityManagerInterface $em,
-        private readonly IssueService $issueService
-    ){
+        private readonly EntityManagerInterface $manager,
+        private readonly IssueService $service,
+    )
+    {
     }
 
     public function mount(): void
@@ -43,39 +47,21 @@ class ProjectBoard
     #[LiveAction]
     public function getIssues(): void
     {
-        $this->readyIssues = $this->issueService->getReadyIssues();
-        $this->inProgressIssues = $this->issueService->getinProgressIssues();
-        $this->resolvedIssues = $this->issueService->getresolvedIssues();
+        $this->newIssues = $this->service->getNewIssues();
+        $this->readyIssues = $this->service->getReadyIssues();
+        $this->inProgressIssues = $this->service->getInProgressIssues();
+        $this->resolvedIssues = $this->service->getResolvedIssues();
     }
-
 
     #[LiveAction]
-public function updateIssuesStatus(#[LiveArg] string $id, #[LiveArg] string $status): void
-{
-    // Vérifier si l'ID est valide
-    if (!$id) {
-        return;
+    public function updateIssueStatus(#[LiveArg] string $id, #[LiveArg] IssueStatus $status): void
+    {
+        $issue = $this->manager->getRepository(\App\Entity\Issue::class)->find($id);
+
+        $issue->setStatus($status);
+        $this->manager->persist($issue);
+        $this->manager->flush();
+
+        $this->getIssues();
     }
-    
-    // Récupérer l'issue
-    $issue = $this->em->getRepository(\App\Entity\Issue::class)->find($id);
-    
-    // Vérifier si l'issue existe
-    if (!$issue) {
-        return;
-    }
-    
-    // Convertir le status string en IssueStatus enum
-    // Attention: selon votre implémentation, vous pourriez avoir besoin d'ajuster cette ligne
-    $issueStatus = IssueStatus::from($status);
-    
-    // Mettre à jour le statut
-    $issue->setStatus($issueStatus);
-    
-    // Sauvegarder les changements
-    $this->em->flush();
-    
-    // Rafraîchir les listes
-    $this->getIssues();
-}
 }

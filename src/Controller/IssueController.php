@@ -17,6 +17,7 @@ class IssueController extends AbstractController
         if(!$issue){
             return $this->redirectToRoute('issue_list');
         }
+
         return $this->render('issue/show.html.twig', [
             'issue' => $issue,
             'statuses' => IssueStatus::cases(),

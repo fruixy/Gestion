@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil{% endblock %}
+{% block title %}Profile{% endblock %}
 
 {% block body %}
     <div class="container mt-3">
         <div class="row">
             <div class="col">
                 {{ component('ProfileForm', {
-                    'user': user
+                    'user': user,
                 }) }}
             </div>
         </div>
     </div>
-
 {% endblock %}
