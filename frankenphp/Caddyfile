@@ -1,11 +1,6 @@
 {
     order php_server before file_server
     auto_https disable_redirects
-    servers :443 {
-        protocol {
-            allow_h2c
-        }
-    }
 }
 
 {$SERVER_NAME:localhost} {
