@@ -3,18 +3,19 @@
 use App\Kernel;
 use Symfony\Component\HttpFoundation\Request;
 
-// 🔥 CORRECTION POUR RAILWAY + HTTPS
+// 🔥 Correction Railway pour HTTPS
 if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
     $_SERVER['HTTPS'] = 'on';
 }
 
+// 🔥 Correction complète pour Railway Proxies
 Request::setTrustedProxies(
     [$_SERVER['REMOTE_ADDR']],
-    Request::HEADER_X_FORWARDED_ALL
+    Request::HEADER_X_FORWARDED_PROTO
 );
 
-// Auto-loader Symfony
-require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
+// Chargement normal Symfony
+require_once dirname(DIR).'/vendor/autoload_runtime.php';
 
 return function (array $context) {
     return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
